@@ -9,8 +9,8 @@ import { PasswordTransformer } from './password.transformer';
   name: 'users',
 })
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ length: 255 })
   firstName: string;

@@ -4,7 +4,6 @@ import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService, LoginPayload, RegisterPayload } from './';
 import { CurrentUser } from './../common/decorator/current-user.decorator';
 import { User, UsersService } from './../user';
-
 @Controller('api/auth')
 @ApiTags('authentication')
 export class AuthController {
@@ -33,7 +32,7 @@ export class AuthController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
-  @Get('me')
+  @Get('user')
   @ApiResponse({ status: 200, description: 'Successful Response' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getLoggedInUser(@CurrentUser() user: User): Promise<User> {

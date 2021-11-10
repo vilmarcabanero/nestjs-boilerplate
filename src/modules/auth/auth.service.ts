@@ -23,8 +23,13 @@ export class AuthService {
 
   async validateUser(payload: LoginPayload): Promise<any> {
     const user = await this.userService.getByEmail(payload.email);
-    if (!user || !Hash.compare(payload.password, user.password)) {
-      throw new UnauthorizedException('Invalid credentials!');
+    // if (!user || !Hash.compare(payload.password, user.password)) {
+    //   throw new UnauthorizedException('Invalid credentials!');
+    // }
+    if (!user) {
+      throw new UnauthorizedException(`${payload.email} is not yet registered.`);
+    } else if (!Hash.compare(payload.password, user.password)) {
+      throw new UnauthorizedException('Invalid password.');
     }
     return user;
   }
